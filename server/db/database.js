@@ -22,28 +22,25 @@ const db = createClient({
 
 // Funkce pro inicializaci databáze – vytvoří tabulku "books" pokud neexistuje
 // Voláme ji jednou při startu serveru, aby byla tabulka vždy připravená
+
 async function initializeDatabase() {
-  try {
-    // SQL příkaz CREATE TABLE IF NOT EXISTS zajistí, že tabulku vytvoříme
-    // jen pokud ještě neexistuje – takže to můžeme volat opakovaně bez problémů
-    await db.execute(`
-      CREATE TABLE IF NOT EXISTS books (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT NOT NULL,
-        author TEXT NOT NULL,
-        year INTEGER,
-        genre TEXT,
-        rating INTEGER DEFAULT 0,
-        read INTEGER DEFAULT 0
-      )
-    `);
-    console.log("✅ Tabulka 'books' je připravená");
-  } catch (error) {
-    // Pokud se něco pokazí (špatný token, nedostupná DB), vypíšeme chybu
-    console.error("❌ Chyba při inicializaci databáze:", error.message);
-    throw error;
-  }
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS books (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      title TEXT NOT NULL,
+      author TEXT NOT NULL,
+      year INTEGER,
+      genre TEXT,
+      rating INTEGER,
+      read INTEGER
+    )
+  `);
 }
+
+module.exports = {
+  db,
+  initializeDatabase,
+};
 
 // Exportujeme klienta databáze a inicializační funkci,
 // aby je mohly používat ostatní části aplikace (routes, server)
