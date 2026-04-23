@@ -18,7 +18,7 @@ import BookList from "./components/BookList";
 import BookForm from "./components/BookForm";
 
 // URL našeho backendu – Express server běží na portu 3001
-const API_URL = "http://localhost:3001/api/books";
+const API_URL = "/api/books";
 
 function App() {
   // ─── Stavové proměnné (state) ─────────────
