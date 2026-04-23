@@ -34,10 +34,10 @@ app.get("/api", (req, res) => {
 });
 
 // ─── React build (если есть фронт) ───────
-app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
 // ─── Запуск сервера ──────────────────────
