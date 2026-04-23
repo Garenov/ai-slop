@@ -4,7 +4,6 @@
 // Tento soubor se stará o dvě věci:
 //   1. Vytvoří klienta (spojení) s Turso databází pomocí URL a tokenu
 //   2. Při prvním spuštění založí tabulku "books", pokud ještě neexistuje
-import { createClient } from "@libsql/client";
 
 // Importujeme funkci createClient z knihovny @libsql/client
 // Tato knihovna nám umožňuje komunikovat s Turso (libSQL) databází
@@ -16,7 +15,7 @@ require("dotenv").config();
 // Vytvoříme klienta pro komunikaci s Turso databází
 // - url: adresa naší databáze na Turso (např. libsql://moje-db.turso.io)
 // - authToken: bezpečnostní token pro ověření přístupu
-const client = createClient({
+const db = createClient({
   url: process.env.TURSO_DATABASE_URL,
   authToken: process.env.TURSO_AUTH_TOKEN,
 });
@@ -39,7 +38,7 @@ async function initializeDatabase() {
 }
 
 module.exports = {
-  client,
+  db,
   initializeDatabase,
 };
 
