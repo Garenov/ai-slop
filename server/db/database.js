@@ -39,7 +39,7 @@ async function initializeDatabase() {
 }
 
 module.exports = {
-  db,
+  client,
   initializeDatabase,
 };
 
